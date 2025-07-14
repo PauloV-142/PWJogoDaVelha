@@ -25,21 +25,23 @@ header, footer {
     background-color: rgb(0, 0, 0, 0.50);
 }
 
-header button {
+#trocarModo {
     all: unset;
     height: 100%;
     margin: 0px;
 }
 
 main {
-    height: 88dvh;
-    margin:  2rem auto;
+    min-height: 88dvh;
+    height: fit-content;
+    margin: auto;
     max-width: 64rem;
 }
 
 .placar {
     display: flex;
     justify-content: space-evenly;
+    margin:  1.5rem auto;
 }
 .placar img {
     width: 6rem;
@@ -51,15 +53,37 @@ main {
 }
 
 .tabuleiro {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr; */
     border: 2px solid black;
+    height: 100%;
+    width: 100%;
+    background-image: url(https://img.icons8.com/sf-ultralight/700/hashtag.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover; */
+    padding: 2.2%;
     margin: auto;
-    width: 75%;
-    height: 75%;
+    width: 32rem;
+    height: 32rem;
     border-radius: 50px;
-    background-image: url(https://img.icons8.com/sf-ultralight/500/hashtag.png);
 }
 
+.quadrado {
+    margin: 5%;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+}
+.quadrado:hover {
+    background-color: rgba(0, 0, 0, 0.226);
+    border: none;
+}
+
+
 footer {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
 }
