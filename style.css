@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
+    color: white;
     /* border: 1px solid gold; */
 }
 body {
@@ -10,7 +11,6 @@ body {
     background-color: rgb(75, 75, 75);
     background-image: linear-gradient(to left, #0099ff99 0%,  #0099ff99 25%, #ff310d99 75%, #ff310d99 100%);
     /* background-image: linear-gradient(to left,  #0099ff99, #ff310d99); */
-    color: white;
 }
 header {
     display: flex;
@@ -113,7 +113,7 @@ main {
     background-size: contain;
 }
 
-footer {
+footer, .flex-centro {
     margin-top: 2rem;
     display: flex;
     justify-content: center;

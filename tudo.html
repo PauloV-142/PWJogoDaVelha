@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- <link rel="favicon" href="favicon.ico" type="image/x-icon"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    /* border: 1px solid gold; */
+}
+body {
+    height: 100dvh;
+    font-family: 'inter';
+    background-color: rgb(75, 75, 75);
+    background-image: linear-gradient(to left, #0099ff99 0%,  #0099ff99 25%, #ff310d99 75%, #ff310d99 100%);
+    /* background-image: linear-gradient(to left,  #0099ff99, #ff310d99); */
+    color: white;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header, footer {
+    padding: 1rem 2rem;
+}
+
+.fundo-escuro {
+    background-color: rgb(0, 0, 0, 0.50);
+}
+
+#trocarModo {
+    all: unset;
+    height: 100%;
+    padding: 0px 1rem;
+    margin: 0px;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+    border-radius: 7px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+#trocarModo:hover{
+    transition: all 500ms;
+    background-color: transparent;
+    /* filter: invert(200); */
+}
+
+main {
+    min-height: 88dvh;
+    height: fit-content;
+    margin: auto;
+    max-width: 64rem;
+}
+
+.placar {
+    display: flex;
+    justify-content: space-evenly;
+    margin:  1.5rem auto;
+    font-size: 2rem;
+    align-items: center;
+    width: 32rem;
+}
+
+.placar div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.placar img {
+    width: 6rem;
+    height: 6rem;
+}
+
+.inativo {
+    filter: opacity(50%);
+}
+
+.tabuleiro {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr; */
+    border: 2px solid black;
+    height: 100%;
+    width: 100%;
+    background-image: url(https://img.icons8.com/sf-ultralight/700/hashtag.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover; */
+    padding: 2.2%;
+    margin: auto;
+    width: 32rem;
+    height: 32rem;
+    border-radius: 50px;
+}
+
+.quadrado {
+    margin: 5%;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.quadrado:hover {
+    background-color: rgba(0, 0, 0, 0.226);
+}
+
+.imgx{
+    background-image: url(https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png);
+    background-size: contain;
+}
+
+.imgo{
+    background-image: url(https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png);
+    background-size: contain;
+}
+
+footer, .flex-centro {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.NaN {
+    color: #00f7ff;
+    color: #ff4747;
+}
+    </style>
+</head>
+<body class="gradiente">
+    <header class="fundo-escuro">
+        <h1>Jogo da Velha</h1>
+        <button id="trocarModo"><h1>D</h1></button>
+    </header>
+    <main>
+        <section>
+            <div class="placar">
+                <div>
+                    <img class="" src="https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png" alt="X">
+                    <h1 id="pontosX">0</h1>
+                </div>
+                <h1>|</h1>
+                <div>
+                    <h1 id="pontosO">0</h1>
+                    <img class="inati" src="https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png" alt="O">
+                </div>    
+            </div>
+        </section>
+        <section>
+            <div class="tabuleiro fundo-escuro">
+                <button class="quadrado" id="0"></button>
+                <button class="quadrado" id="1"></button>
+                <button class="quadrado" id="2"></button>
+                <button class="quadrado" id="3"></button>
+                <button class="quadrado" id="4"></button>
+                <button class="quadrado" id="5"></button>
+                <button class="quadrado" id="6"></button>
+                <button class="quadrado" id="7"></button>
+                <button class="quadrado" id="8"></button>
+            </div>
+        </section>
+        <section class='flex-centro'>
+                <h1 id='tabDev'>[0,0,0,0,0,0,0,0,0]</h1>
+        </section>
+    </main>
+    <footer class="flex-centro fundo-escuro">Jogo da Velha Caseiro</footer>
+    <script>
+
+let jogador = 0;
+let tab = [0,0,0,0,0,0,0,0,0];
+const imgVal = ['imgo', 'imgx'];
+const intVal = [-1, 1];
+const debug = document.getElementById('tabDev');
+
+
+const alternarJogador = num => (num + 1) % 2;
+
+document.querySelectorAll('.quadrado').forEach(element => {
+     element.addEventListener('click',
+     () => play(element), {once: true});
+});
+
+function update(slot) {
+   const quadradoId = slot.id;                           // Modificar os ids, e acessar a string para obter o número
+   tab[quadradoId] = intVal[jogador];
+   debug.innerText = tab;
+}
+
+function play(slot) {
+   jogador = alternarJogador(jogador);
+   jog = imgVal[jogador];
+   slot.classList.add(jog);
+   update(slot);
+}
+
+    </script>
+</body>
+</html>

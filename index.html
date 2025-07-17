@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="favicon" href="favicon.ico" type="image/x-icon">
+    <!-- <link rel="favicon" href="https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
@@ -26,21 +26,24 @@
                 <div>
                     <h1 id="pontosO">0</h1>
                     <img class="inati" src="https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png" alt="O">
-                </div>    
+                </div>
             </div>
         </section>
         <section>
             <div class="tabuleiro fundo-escuro">
-                <button class="quadrado" id="quadrado1" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado2" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado3" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado4" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado5" onclick="play(this)"></button>
-                <button class="quadrado imgo" id="quadrado6" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado7" onclick="play(this)"></button>
-                <button class="quadrado" id="quadrado8" onclick="play(this)"></button>
-                <button class="quadrado imgx" id="quadrado9" onclick="play(this)"></button>
+                <button class="quadrado" id="0"><h1>0</h1></button>
+                <button class="quadrado" id="1"><h1>1</h1></button>
+                <button class="quadrado" id="2"><h1>2</h1></button>
+                <button class="quadrado" id="3"><h1>3</h1></button>
+                <button class="quadrado" id="4"><h1>4</h1></button>
+                <button class="quadrado" id="5"><h1>5</h1></button>
+                <button class="quadrado" id="6"><h1>6</h1></button>
+                <button class="quadrado" id="7"><h1>7</h1></button>
+                <button class="quadrado" id="8"><h1>8</h1></button>
             </div>
+        </section>
+        <section class='flex-centro'>
+                <h1 id='tabDev'>[0,0,0,0,0,0,0,0,0]</h1>
         </section>
     </main>
     <footer class="flex-centro fundo-escuro">Jogo da Velha Caseiro</footer>
