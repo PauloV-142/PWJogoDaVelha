@@ -2,20 +2,23 @@ let jogador = 0; //Talvez o jogador possa ser 1 e -1, para não precisar do arra
 let tab = [0,0,0,0,0,0,0,0,0];
 const imgVal = ['imgo', 'imgx'];
 const intVal = [-1, 1];
-const debug = document.getElementById('tabDev');
 const winGuide = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [2, 4, 6]]; //Hmm, wait, New Way of doing it!
 
-const alternarJogador = num => (++num) % 2;
+const txtDebug = document.getElementById('tabDev');
+const btnReiniciar = document.getElementById('reiniciar');
+
 
 document.querySelectorAll('.quadrado').forEach(element => {
-     element.addEventListener('click',
-     () => play(element), {once: true});
-});
+   element.addEventListener('click',
+      () => play(element), {once: true});
+   });
+   
+const alternarJogador = num => (++num) % 2;
 
-function update(slot) {
+   function update(slot) {
    const quadradoId = slot.id; // Modificar os ids, e acessar a string para obter o número.
    tab[quadradoId] = intVal[jogador];
-   debug.innerText = tab;
+   txtDebug.innerText = tab;
 }
 
 function play(slot) {
@@ -25,3 +28,6 @@ function play(slot) {
    update(slot);
 }
 
+function verificar() {
+
+}
