@@ -1,16 +1,28 @@
-* {
+  * {
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
     color: white;
     /* border: 1px solid gold; */
 }
+:root{
+    /* --total: 100%; */
+    --tamanho: 32vw; 
+}
+
+html{
+    height: 100%;
+}
+
 body {
     height: 100dvh;
     font-family: 'inter';
     background-color: rgb(75, 75, 75);
     background-image: linear-gradient(to left, #0099ff99 0%,  #0099ff99 25%, #ff310d99 75%, #ff310d99 100%);
     /* background-image: linear-gradient(to left,  #0099ff99, #ff310d99); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 }
 header {
     display: flex;
@@ -48,14 +60,14 @@ main {
     display: flex;
     justify-content: space-evenly;
     margin:  1.5rem auto;
-    font-size: 2rem;
+    font-size: 1.5rem;
     align-items: center;
-    width: 32rem;
+    width: fit-content;
+    white-space-collapse: preserve-spaces;
 }
 
 .placar div{
     display: flex;
-    flex-direction: row;
     align-items: center;
 }
 
@@ -71,26 +83,38 @@ main {
 .tabuleiro {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr 1fr 1fr; */
-    /* border: 2px solid black; */
-    height: 100%;
-    width: 100%;
-    background-image: url(https://img.icons8.com/sf-ultralight/700/hashtag.png);
+    grid-template-rows: 1fr 1fr 1fr;
+    background-image: url(https://img.icons8.com/sf-ultralight/512/hashtag.png); 
     background-repeat: no-repeat;
     background-position: center;
-    /* background-size: cover; */
-    padding: 2.2%;
+    background-size: 136%;
+    padding: calc(var(--tamanho)*(0.0625*3/4));/* 6.25% do tamanho do tabuleiro é o distanciamento ideal para caber na imagem de fundo usada. Deixando 1/4 para a margem.*/
     margin: auto;
-    width: 32rem;
-    height: 32rem;
+    width: var(--tamanho);
+    height: var(--tamanho);
 }
 
+@media(max-width:1024px) {
+    :root{
+        --tamanho: 60vw;
+    }
+}
+
+@media(max-width:480px) {
+    :root{
+        --tamanho: 90vw
+    }
+}
+
+
 .quadrado {
-    margin: 5%;
+    margin: calc(var(--tamanho)*(0.0625/4));/*1/4 ficou para a margem.*/
     background-color: transparent;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .quadrado:hover, #reiniciar:hover, #trocarModo:hover {
     background-color: rgba(0, 0, 0, 0.226);
@@ -118,8 +142,25 @@ footer {
 .grid-centro {
     display: grid;
     justify-content:center;
-    min-width: 32rem;
+    /* grid-template-rows: auto auto auto; */
 }
+
+.menu{
+    margin: 1.5rem auto;
+    text-align: center;
+    max-width: 32rem;
+}
+
+#reiniciar {
+    font-size: 2rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}
+
+
 .flex-centro {
     display: grid;
     justify-content: center;

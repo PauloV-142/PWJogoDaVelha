@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
 </head>
-<body class="gradiente">
+<body>
     <header class="fundo-escuro">
         <h1>Jogo da Velha</h1>
         <button id="trocarModo"><h1>D</h1></button>
@@ -19,13 +19,13 @@
         <section>
             <div class="placar">
                 <div>
-                    <img class="" src="https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png" alt="X">
+                    <img id="img-PontosX" src="https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png" alt="X">
                     <h1 id="pontosX">0</h1>
                 </div>
-                <h1>|</h1>
+                <h1> | </h1>
                 <div>
                     <h1 id="pontosO">0</h1>
-                    <img class="inati" src="https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png" alt="O">
+                    <img id="img-PontosO" src="https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png" alt="O">
                 </div>
             </div>
         </section>
@@ -42,9 +42,10 @@
                 <button class="quadrado" id="8"><h1>8</h1></button>
             </div>
         </section>
-        <section class='grid-centro'>
-                <h1 id='tabDev'>[0,0,0,0,0,0,0,0,0]</h1>
+        <section class='grid-centro menu '>
+                <!-- <h1 id='tabDev'>0,0,0,0,0,0,0,0,0</h1> -->
                 <button id="reiniciar" class="fundo-escuro arredondado">Novo Jogo</button>
+                <h1 id="mensagem">msg</h1>
         </section>
     </main>
     <footer class="flex-centro fundo-escuro">Jogo da Velha Caseiro</footer>
