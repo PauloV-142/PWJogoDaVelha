@@ -115,6 +115,7 @@ main {
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center;
+    /* border: 2px solid #fff; */
 }
 .quadrado:hover, #reiniciar:hover, #trocarModo:hover {
     background-color: rgba(0, 0, 0, 0.226);

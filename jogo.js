@@ -4,7 +4,6 @@ const imgVal = ['imgo', 'imgx'];
 const intVal = [-1, 1];
 const winGuide = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]; //Hmm, wait, New Way of doing it!
 
-
 const txtPontosX = document.getElementById('pontosX');
 const txtPontosO = document.getElementById('pontosO');
 const imgPontos = [document.getElementById('img-PontosX'), document.getElementById('img-PontosO')];
@@ -18,7 +17,7 @@ const txtVitoria = document.getElementById('mensagem');
 
 quadrados.forEach(element => {
    element.addEventListener('click',
-      () => play(element));//, {once: true}
+      () => jogar(element));//, {once: true}
    });
    
 const alternarJogador = num => (++num) % 2;
@@ -31,45 +30,53 @@ function atualizar(slot) {
    // txtDebug.textContent = tab;
 }
 
-function somar(linha) {
-  let soma = 0;
-  for (let celula of linha) {
-    soma += tab[celula]
+function buscarDoTabuleiro(linhaGuia) {
+  let linhaDoTab = new Set();//Talvez um array que não permite repetições seria útil.
+  for (let quadrado of linhaGuia) {
+      linhaDoTab.add(tab[quadrado]);
   }
-  return soma
+  return linhaDoTab
 }
 
-function tratarVitoria(strJogador) {
+function tratarVitoria(strJogador) { //WIP
    txtVitoria.textContent = `${strJogador} Ganhou!`;
-   tab = [];//Para não poder clicar mais.
+   // tab = [];//Para não poder clicar mais.
 }
 
-function play(slot) {
-   if (tab[slot.id] === 0){
-      // console.log(slot.id)
-      jogador = alternarJogador(jogador);
-      jog = imgVal[jogador];
-      slot.classList.add(jog);
-      imgPontos[jogador].classList.remove('inativo');
-      imgPontos[alternarJogador(jogador)].classList.add('inativo');
-      atualizar(slot);
-
-      let linhaSoma
-      for (let linha of winGuide) {
-        linhaSoma = somar(linha)
+function jogar(slot) {
+if (tab[slot.id] === 0){
+   // console.log(slot.id)
+   jogador = alternarJogador(jogador);
+   jog = imgVal[jogador];
+   slot.classList.add(jog);
+   imgPontos[jogador].classList.remove('inativo');
+   imgPontos[alternarJogador(jogador)].classList.add('inativo');
+   atualizar(slot);
+   
+   let vencedor = false
+   for (let linhaGuia of winGuide) {
+      let linha = buscarDoTabuleiro(linhaGuia)
       
-        if (linhaSoma == 3) {
-          pontosX.textContent = ++pontosX.textContent;
-          tratarVitoria('X');
-         }else if (linhaSoma == -3) {
-            pontosO.textContent = ++pontosO.textContent;
-            tratarVitoria('O');
-         } else if (!(tab.includes(0))) {
-            console.log(`Empate ${tab}`)
-         }
+      if (linha.size == 1) {
+         if (linha.has(-1)) {
+            // pontosX.textContent = ++pontosX.textContent;
+            // console.log(`PontosO ${pontosX.textContent}`)
+            // tratarVitoria('X');
+            vencedor = 'O';
+         } else if (linha.has(1)) {
+            // pontosO.textContent = ++pontosO.textContent;
+            // console.log(`PontosO ${pontosO.textContent}`)
+            // tratarVitoria('O');
+            vencedor = 'X';
+         } 
       }
    }
-}
+   if (vencedor) {
+      tratarVitoria(vencedor)
+   } else if (!(tab.includes(0))) {
+      console.log(`Empate ${tab}`)
+   }
+}}
 
 function reiniciar() {
    quadrados.forEach(element => {
