@@ -1,12 +1,17 @@
 let jogador = 0; //Talvez o jogador possa ser 1 e -1, para não precisar do array intVal
-let tab = [0,0,0,0,0,0,0,0,0];
-const imgVal = ['imgo', 'imgx'];
-const intVal = [-1, 1];
+let tab = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
+const imgVal = ['imgo', 'imgx']; //juntar imgVal com imgPontos.
+//const intVal = [-1, 1];
 const winGuide = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]; //Hmm, wait, New Way of doing it!
 
-const txtPontosX = document.getElementById('pontosX');
-const txtPontosO = document.getElementById('pontosO');
-const imgPontos = [document.getElementById('img-PontosX'), document.getElementById('img-PontosO')];
+const txtPontos = {
+    "X": document.getElementById("pontosX"),
+    "O": document.getElementById('pontosO')
+};
+const imgPontos = [
+    document.getElementById('img-PontosX'),
+    document.getElementById('img-PontosO')
+];
 
 const quadrados = document.querySelectorAll('.quadrado');
 
@@ -26,7 +31,7 @@ const msg = texto => txtVitoria.textContent = texto;
 
 function atualizar(slot) {
    const quadradoId = slot.id; // É melhor eu modificar os ids, e acessar a string para obter o número.
-   tab[quadradoId] = intVal[jogador];
+   tab[quadradoId] = jogador;
    // txtDebug.textContent = tab;
 }
 
@@ -39,12 +44,13 @@ function buscarDoTabuleiro(linhaGuia) {
 }
 
 function tratarVitoria(strJogador) { //WIP
-   txtVitoria.textContent = `${strJogador} Ganhou!`;
-   // tab = [];//Para não poder clicar mais.
+   msg(`${strJogador} Ganhou!`)
+   txtPontos[strJogador].textContent = ++txtPontos[strJogador].textContent
+   tab = [];//Para não poder clicar mais. E nem dar trigger na opção de empate.
 }
 
 function jogar(slot) {
-if (tab[slot.id] === 0){
+if (tab[slot.id] === -1){
    // console.log(slot.id)
    jogador = alternarJogador(jogador);
    jog = imgVal[jogador];
@@ -53,18 +59,18 @@ if (tab[slot.id] === 0){
    imgPontos[alternarJogador(jogador)].classList.add('inativo');
    atualizar(slot);
    
-   let vencedor = false
+   let vencedor = false;
    for (let linhaGuia of winGuide) {
       let linha = buscarDoTabuleiro(linhaGuia)
       
       if (linha.size == 1) {
-         if (linha.has(-1)) {
+         if (linha.has(0)) {
             // pontosX.textContent = ++pontosX.textContent;
             // console.log(`PontosO ${pontosX.textContent}`)
             // tratarVitoria('X');
             vencedor = 'O';
          } else if (linha.has(1)) {
-            // pontosO.textContent = ++pontosO.textContent;
+            //pontosO.textContent = ++pontosO.textContent;
             // console.log(`PontosO ${pontosO.textContent}`)
             // tratarVitoria('O');
             vencedor = 'X';
@@ -73,8 +79,8 @@ if (tab[slot.id] === 0){
    }
    if (vencedor) {
       tratarVitoria(vencedor)
-   } else if (!(tab.includes(0))) {
-      console.log(`Empate ${tab}`)
+   } else if ((!(tab.includes(-1))) && tab.includes(1)) {
+      msg(`Empate ${tab}`)
    }
 }}
 
