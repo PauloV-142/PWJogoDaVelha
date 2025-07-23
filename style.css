@@ -33,9 +33,6 @@ header, footer {
     padding: 1rem 2rem;
 }
 
-.fundo-escuro {
-    background-color: rgb(0, 0, 0, 0.50);
-}
 
 #trocarModo {
     all: unset;
@@ -76,9 +73,6 @@ main {
     height: 6rem;
 }
 
-.inativo {
-    filter: opacity(50%);
-}
 
 .tabuleiro {
     display: grid;
@@ -115,20 +109,10 @@ main {
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center;
-    /* border: 2px solid #fff; */
+
 }
 .quadrado:hover, #reiniciar:hover, #trocarModo:hover {
     background-color: rgba(0, 0, 0, 0.226);
-}
-
-.imgx{
-    background-image: url(https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png);
-    background-size: contain;
-}
-
-.imgo{
-    background-image: url(https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png);
-    background-size: contain;
 }
 
 #reiniciar {
@@ -159,6 +143,8 @@ footer {
     width: fit-content;
     height: fit-content;
     margin: auto;
+    cursor: pointer;
+    /* border: 2px solid #fff; */
 }
 
 
@@ -171,7 +157,28 @@ footer {
     border-radius: 50px;
 }
 
-.NaN {
+
+/* Classes Auxiliares */
+.fundo-escuro {
+    background-color: rgb(0, 0, 0, 0.50);
+    /* border: 2px solid #fff; */
+}
+
+.imgx{
+    background-image: url(https://img.icons8.com/ios-glyphs/256/ff4747/multiply.png);
+    background-size: contain;
+}
+
+.imgo{
+    background-image: url(https://img.icons8.com/sf-black-filled/00f7ff/256/circled.png);
+    background-size: contain;
+}
+
+.inativo {
+    filter: opacity(50%);
+}
+
+.NaN { /* Cor dos ícones no link */
     color: #00f7ff;
     color: #ff4747;
 }
