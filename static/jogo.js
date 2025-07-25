@@ -89,21 +89,6 @@ function reiniciar() {
       elemento.style.backgroundColor = ''
    }
    )
-   // txtDebug.textContent = tab;
 }
 
 btnReiniciar.addEventListener('click', reiniciar);
-
-
-//Já sei! Vou usar a sintaxe (do python):
-// if not 0 in linha:
-//    if -1 in linha and not 1 in linha:
-//         'O Ganhou!'
-//      else:
-//         'X ganhou'
-
-
-// let setLegal = new Set([0,1,2]);
-// console.log(setLegal);
-// console.log(setLegal.has(1));
-// console.log(setLegal.has(4));
