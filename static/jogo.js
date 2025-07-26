@@ -45,6 +45,7 @@ function tratarVitoria(strJogador, linhaVencedora) {
          quadrados[coord].style.backgroundColor = `rgb(${rgbR()}, ${rgbR()}, ${rgbR()})`
       })
    tab = [];//Para não poder clicar mais. E nem dar trigger na condição de empate.
+   animacaoVitoria()
 }
 
 function jogar(slot) {
@@ -92,3 +93,23 @@ function reiniciar() {
 }
 
 btnReiniciar.addEventListener('click', reiniciar);
+
+// Animação
+
+function animacaoVitoria() {
+   const fundo_tabuleiro = document.querySelector('.fundo-tabuleiro');
+   console.log('animacao!');
+   let i = 40;
+   function animar() {
+      if (i < 300) {
+         // fundo_tabuleiro.style.backgroundImage = `radial-gradient(farthest-side, rgba(0, 0, 0, 0.5) ${i-140}%, white ${i-80}%, rgba(0, 0, 0, 0.5) ${i-60}%, rgba(0, 0, 0, 0.5) ${i-40}%, white ${i-20}%, rgba(0, 0, 0, 0.5) ${i}%)`;
+         fundo_tabuleiro.style.backgroundImage = 
+         `radial-gradient(farthest-side, rgba(0, 0, 0, 0.5) 0%a, white ${i}, rgba(0, 0, 0, 0.5) ${i-40}%)`;
+         // radial-gradient()`
+         i += 4;
+         // setTimeout(animar, 50);
+         requestAnimationFrame(animar)
+      };
+   }
+   animar();
+}
