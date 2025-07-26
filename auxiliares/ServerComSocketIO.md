@@ -21,6 +21,7 @@ socketio = SocketIO(app) # E aqui.
 ---
 
 #### Funcionamento do SocketIO
+- ##### Comunicação:
 ###### O cliente envia um evento
 1. O cliente (JavaScript) usa o seguinte método para enviar dados ao servidor: 
 ```js
@@ -32,7 +33,7 @@ socket.emit('evento', dados);
 ```python
 @socketio.on('evento') 
 def handle_evento(data):
-    print(data)
+    print(f'Evento recebido: {data}')
 ```
 ###### Servidor envia uma resposta
 3. O servidor usa o seguinte comando para enviar dados processados de volta ao cliente.
@@ -48,4 +49,14 @@ socket.on('evento', callback)
 socket.on('evento', (data) => {
     console.log(data.resposta);
 });
+```
+
+- ##### No cliente (JavaScript com SocketIO)
+1. Adicione o script do SocketIO no HTML
+```html
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+```
+2. Use ```io()``` para conectar ao servidor
+```js
+const socket = io('http://localhost:5000');
 ```
