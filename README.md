@@ -2,7 +2,7 @@
 Um jogo da velha simples e elegante feito com HTML, CSS e JavaScript, feito como forma de aprendizado.
 
 ### Pré visualização:
-![Pré Visualização](visual.png)
+![Pré Visualização](auxiliares/visual.png)
 
 ### Ideias futuras:
 
