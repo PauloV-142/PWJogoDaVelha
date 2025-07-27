@@ -18,6 +18,8 @@ const quadrados = document.querySelectorAll('.quadrado');
 const btnReiniciar = document.getElementById('reiniciar');
 const txtVitoria = document.getElementById('mensagem');
 
+const socket = io('http://192.168.1.9:5000/'); //Conecta o site à LAN. Mas não está dando certo TwT
+
 quadrados.forEach(element => {
    element.addEventListener('click',
       () => jogar(element));
@@ -38,7 +40,7 @@ function buscarDoTabuleiro(linhaGuia) {
 function tratarVitoria(strJogador, linhaVencedora) {
    msg(`${strJogador} Ganhou!`);
    txtPontos[strJogador].textContent = ++txtPontos[strJogador].textContent; // Adiciona 1 ao contador.
-   
+   socket.emit('vitoria', strJogador)
    function rgbR(){ return Math.random() * 255 };
 
    linhaVencedora.forEach(coord => { // quadradosVencedores seria melhor OwO
@@ -52,7 +54,8 @@ function jogar(slot) {
 const quadradoId = slot.id
 if (tab[quadradoId] === -1){ // Verifica se o quadrado não está ocupado.
    jogador = alternarJogador(jogador);
-   tab[quadradoId] = jogador
+   socket.emit('quadrado_click', quadradoId, jogador); // Envia o quadrado clicado!!!
+   tab[quadradoId] = jogador;
 
    slot.classList.add(imgVal[jogador]); // Coloca a imagem no quadrado (slot).
    imgPontos[jogador].classList.remove('inativo');
@@ -74,7 +77,6 @@ if (tab[quadradoId] === -1){ // Verifica se o quadrado não está ocupado.
    }
    if (vencedor) {
       tratarVitoria(vencedor, linhaVencedora)
-      console.log(linhaVencedora)
    } else if (!tab.includes(-1) && tab.includes(1)) {
       msg("Empate!")
    }
@@ -98,7 +100,6 @@ btnReiniciar.addEventListener('click', reiniciar);
 
 function animacaoVitoria() {
    const fundo_tabuleiro = document.querySelector('.fundo-tabuleiro');
-   console.log('animacao!');
    let i = 0;
    function animar() {
       if (i < 300) {
@@ -116,3 +117,7 @@ function animacaoVitoria() {
    }
    animar();
 }
+
+socket.on('retorno', (data) => {
+   console.log(data.mensagem)
+})
