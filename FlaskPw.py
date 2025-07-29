@@ -7,7 +7,6 @@ socketio = SocketIO(app)
 
 jogo1 = Jogo()
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -17,9 +16,9 @@ def index():
 def quadradoClick(quadradoId):
     print(f'Clicou no quadrado {quadradoId}!')
     jogada = jogo1.jogar(quadradoId)
-    socketio.emit('atualizar-quadrado', {'id':quadradoId, 'jogadorAtual': jogo1.jogadorAtual})
-    if type(jogada) == dict:
-        socketio.emit('vitoria', jogada)
+    socketio.emit('atualizar-quadrado', {'quadradoId': quadradoId, 'jogadorAtual': jogada})
+    if jogo1.linhaVencedora:
+        socketio.emit('vitoria', {'jogadorVencedor': jogada, 'linhaVencedora': jogo1.linhaVencedora})
     
 
 @socketio.on('reiniciar')

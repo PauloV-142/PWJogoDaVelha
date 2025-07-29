@@ -30,9 +30,9 @@ quadrados.forEach((element) => {
 
 
 socket.on('atualizar-quadrado', (dados) => {
-    quadrados[dados.id].classList.add(`img${dados.jogadorAtual}`)
-    console.log(dados.id, dados.jogadorAtual)
-    tabuleiro[dados.id] = dados.jogadorAtual;
+    quadrados[dados.quadradoId].classList.add(`img${dados.jogadorAtual}`)
+    console.log(dados.quadradoId, dados.jogadorAtual)
+    tabuleiro[dados.quadradoId] = dados.jogadorAtual;
 })
 
 

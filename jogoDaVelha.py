@@ -22,34 +22,41 @@ class Jogo:
     def __init__ (self) -> None:
         self.tabuleiro = list(range(9))
         self.jogadorAtual = 'X'
+        self.linhaVencedora = set()
 
     def jogar(self, quadradoId):
         """Aplica a mudança no tabuleiro dependendo do jogador e verifica vitória."""
-        if type(self.tabuleiro[quadradoId]) == int:-
-
+        if type(self.tabuleiro[quadradoId]) == int:
             self.tabuleiro[quadradoId] = self.jogadorAtual
-            mostrarTabuleiro(self.tabuleiro)
-            quemVenceu = self.verificarVitoria()
+            if self.verificarVitoria():
+                return self.jogadorAtual
             self.jogadorAtual = alternarJogador(self.jogadorAtual)
-            return quemVenceu
-        return self.jogadorAtual
-
+            return self.jogadorAtual
+    
     def verificarVitoria(self):
         """Verifica a vitória com base no guia."""
         for coords in guia:
             linha = {self.tabuleiro[coord] for coord in coords}
             # print(linha)
             if len(linha) == 1 and -1 not in linha:
-                print(self.jogadorAtual, 'venceu!')
-                return {'linhaVencedora': coords, 'jogadorVencedor': self.jogadorAtual}
+                self.linhaVencedora = self.linhaVencedora | set(coords)
+ 
+        if self.linhaVencedora:
+            # print(self.jogadorAtual, 'venceu!')
+            # print(self.linhaVencedora)
+            return True # {'linhaVencedora': coords, 'jogadorVencedor': self.jogadorAtual}
         return False
 
 if __name__ == '__main__':
     jogo = Jogo()
+
     jogada = jogo.jogar(int(input('Quadradinho: ')))
+    mostrarTabuleiro(jogo.tabuleiro)
+
     while type(jogada) != dict:
         jogada = jogo.jogar(int(input('Quadradinho: ')))
-    # help(type({0}))
+        mostrarTabuleiro(jogo.tabuleiro)
+
 
     '''# Para me lembrar de que existe outro modo.
     # def verificarVitoria(self, jogador: int) -> bool:
