@@ -33,15 +33,9 @@
         <section>
             <div class="fundo-tabuleiro arredondado">
                 <div class="tabuleiro arredondado">
-                    <button class="quadrado" id="0"></button>
-                    <button class="quadrado" id="1"></button>
-                    <button class="quadrado" id="2"></button>
-                    <button class="quadrado" id="3"></button>
-                    <button class="quadrado" id="4"></button>
-                    <button class="quadrado" id="5"></button>
-                    <button class="quadrado" id="6"></button>
-                    <button class="quadrado" id="7"></button>
-                    <button class="quadrado" id="8"></button>
+                    {% for id in range(9) %}
+                        <buttor class="quadrado" id="{{ id }}"></buttor>
+                    {% endfor %}
                 </div>
             </div>
             </section>
