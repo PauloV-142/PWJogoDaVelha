@@ -7,3 +7,7 @@ btnEnviar.addEventListener('click', () => {
     console.log(inputNome.value)
     socket.emit('novo-usuario', inputNome.value)
 })
+
+socket.on('notificacao-acesso', (data) => {
+    console.log(data)
+})

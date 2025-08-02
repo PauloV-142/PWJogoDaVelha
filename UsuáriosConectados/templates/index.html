@@ -9,12 +9,10 @@
 <body>
     <h1>
         Olá {{sid}}
-    </h1>
-    <form action="" id="login">    
+    </h1> 
         <input type="text" name="nome" id="input-nome" placeholder="Apelido...">
         <button id="btn-enviar">Enviar</button>
         <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
         <script src="{{url_for('static', filename='script.js')}}"></script>
-    </form>
 </body>
 </html>

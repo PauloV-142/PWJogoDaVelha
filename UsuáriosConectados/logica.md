@@ -1,4 +1,4 @@
-# Gerenciamento de usuáris com Flask
+# Gerenciamento de usuários com Flask
 
 ## Identificação
 

@@ -23,6 +23,7 @@ def addNovoUsuario(apelido):
     sid = request.sid
     userData[sid].update({'nome': apelido})
     print(userData)
+    socketio.emit('notificacao-acesso', userData)
 
 app.run(host="0.0.0.0", port=5000, debug=True)
 # O modo debug recarrega automaticamente e mostra erros no console do navegador.

@@ -1,18 +1,14 @@
-guia = [[0, 1, 2], [3, 4, 5], [6, 7, 8], # Linhas
+GUIA = [[0, 1, 2], [3, 4, 5], [6, 7, 8], # Linhas
         [0, 3, 6], [1, 4, 7], [2, 5, 8], # Colunas
         [0, 4, 8], [2, 4, 6]] # Diagonais
-
-def alternarJogador(jogador):
-    return 'X' if jogador == 'O' else 'O'
 
 def mostrarTabuleiro(tabuleiro):
     """Mostra o tabuleiro como texto."""
     def quebrarLinha(i):
         """Verifica se é necessário quebrar linha no loop ao mostrar o tabuleiro 3x3 como texto."""
-        if (i + 1) % 3 == 0:
+        if (i + 1) % 3 == 0: 
             return '\n'
         return ''
-
     for i, string in enumerate(tabuleiro):
         fimDaLinha = quebrarLinha(i)
         print(f' {string} ', end=fimDaLinha)
@@ -22,40 +18,42 @@ class Jogo:
     def __init__ (self) -> None:
         self.tabuleiro = list(range(9))
         self.jogadorAtual = 'X'
-        self.linhaVencedora = set()
 
     def jogar(self, quadradoId):
         """Aplica a mudança no tabuleiro dependendo do jogador e verifica vitória."""
         if type(self.tabuleiro[quadradoId]) == int:
             self.tabuleiro[quadradoId] = self.jogadorAtual
-            if self.verificarVitoria():
-                return self.jogadorAtual
-            self.jogadorAtual = alternarJogador(self.jogadorAtual)
-            return self.jogadorAtual
-    
+            return self.verificarVitoria()
+        else: print(f'Quadrado {quadradoId} ocupado!')
+
     def verificarVitoria(self):
         """Verifica a vitória com base no guia."""
-        for coords in guia:
+        linhaVencedora = set()
+        for coords in GUIA:
             linha = {self.tabuleiro[coord] for coord in coords}
-            # print(linha)
             if len(linha) == 1 and -1 not in linha:
-                self.linhaVencedora = self.linhaVencedora | set(coords)
- 
-        if self.linhaVencedora:
-            # print(self.jogadorAtual, 'venceu!')
-            # print(self.linhaVencedora)
-            return True # {'linhaVencedora': coords, 'jogadorVencedor': self.jogadorAtual}
-        return False
+                linhaVencedora = linhaVencedora | set(coords)
+        return linhaVencedora
+
+    def alternarJogador(self):
+        self.jogadorAtual = 'X' if self.jogadorAtual == 'O' else 'O'
 
 if __name__ == '__main__':
     jogo = Jogo()
-
-    jogada = jogo.jogar(int(input('Quadradinho: ')))
-    mostrarTabuleiro(jogo.tabuleiro)
-
-    while type(jogada) != dict:
-        jogada = jogo.jogar(int(input('Quadradinho: ')))
+    i = 0
+    while i < 9:
+        if linhaVencedora:= jogo.jogar(int(input('QuadradoID: '))):
+            print(jogo.jogadorAtual, 'Ganhou!')
+            break
+        else: 
+            jogo.alternarJogador()
+            i += 1
         mostrarTabuleiro(jogo.tabuleiro)
+    if len(set(jogo.tabuleiro)) == 2:
+        print('Empatou!')
+        
+    # fimDeJogo('empate')
+    # NOTE FIXME HELP OWO TODO
 
 
     '''# Para me lembrar de que existe outro modo.

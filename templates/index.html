@@ -34,8 +34,8 @@
             <div class="fundo-tabuleiro arredondado">
                 <div class="tabuleiro arredondado">
                     {% for id in range(9) %}
-                        <buttor class="quadrado" id="{{ id }}"></buttor>
-                    {% endfor %}
+                        <button class="quadrado" id="{{ id }}"></button>
+                    {% endfor %}7+0
                 </div>
             </div>
             </section>
@@ -48,7 +48,6 @@
     <footer class="flex-centro fundo-escuro">Jogo da Velha Caseiro</footer>
     <!-- Script do SocketIO! -->
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <!-- <script src="jogo.js"></script> -->
     <script src="{{url_for('static', filename='cliente.js')}}"></script>
 </body>
 </html>
